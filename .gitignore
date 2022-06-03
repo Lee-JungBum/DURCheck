@@ -17,7 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 #어플리케이션.프로펄티스 추가
-!**/src/resources/application.properties
+!**/src/main/resources/application.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
