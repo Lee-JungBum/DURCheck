@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "iKeeper.medicine_Information.mapper.MedicineMapper">
+    <select id="medicineInformationLoad" resultType="iKeeper.medicine_Information.domain.MedicineInformation">
+        SELECT *
+        FROM  medicine_information
+        WHERE medicine_code = #{medicineCode}
+    </select>
+</mapper>
