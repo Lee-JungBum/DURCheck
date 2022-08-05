@@ -19,6 +19,7 @@ bin/
 #어플리케이션.프로펄티스 추가
 **/src/main/resources/application.properties
 application.properties
+**/src/main/resources/iKeeper/medicine_Information/mapper/
 ### IntelliJ IDEA ###
 .idea
 *.iws
