@@ -8,7 +8,8 @@ import java.util.List;
 @Getter
 @ToString
 public class InputRequestDTO {
-    List<String> medicineCode;
-    int age;
-    boolean isPregnantWomen;
+    private List<String> medicineCode;
+    private int age_a;
+    private int age_b;
+    private boolean isPregnantWomen;
 }

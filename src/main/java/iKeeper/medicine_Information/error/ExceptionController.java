@@ -27,5 +27,27 @@ public class ExceptionController {
         log.warn("CheckData");
         return new ResponseEntity(message,headers, HttpStatus.BAD_REQUEST);
     }
+//    @ExceptionHandler({
+//            ageTypeException.class,
+//    })
+//    public ResponseEntity unspecifiedAgeType(final ageTypeException ex)
+//    {
+//        Message message = new Message();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+//        log.warn("unspecified ageType");
+//        return new ResponseEntity(message,headers,HttpStatus.BAD_REQUEST);
+//    }
+//    @ExceptionHandler({
+//            EmptyPropertyException.class,
+//    })
+//    public ResponseEntity EmptyPropertyException(final EmptyPropertyException ex)
+//    {
+//        Message message = new Message();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+//        log.warn("EmptyPropertyException");
+//        return new ResponseEntity(message,headers,HttpStatus.BAD_REQUEST);
+//    }
 }
 
