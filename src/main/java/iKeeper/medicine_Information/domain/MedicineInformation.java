@@ -14,7 +14,7 @@ public class MedicineInformation {
     private String representativeCode;
     private String standardCode;
     private String medicineCode;
-    private String componentCode;
+    private String ingredientCode;
     private String atcCode;
 
 }

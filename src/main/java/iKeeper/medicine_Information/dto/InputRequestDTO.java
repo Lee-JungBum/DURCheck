@@ -1,7 +1,9 @@
 package iKeeper.medicine_Information.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
 @ToString
 public class InputRequestDTO {
     private List<String> medicineCode;
-    private int age_a;
-    private int age_b;
+    private int ageA;
+    private String ageB;
     private boolean isPregnantWomen;
 }

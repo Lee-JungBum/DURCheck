@@ -1,10 +1,7 @@
 package iKeeper.medicine_Information.service;
 
 import iKeeper.medicine_Information.domain.MedicineInformation;
-import iKeeper.medicine_Information.dto.AnswerResponseDTO;
-import iKeeper.medicine_Information.dto.InputRequestDTO;
-import iKeeper.medicine_Information.dto.MedicineInformationDTO;
-import iKeeper.medicine_Information.dto.PregnantWomanAnswerResponseDTO;
+import iKeeper.medicine_Information.dto.*;
 import iKeeper.medicine_Information.error.EmptyPropertyException;
 import iKeeper.medicine_Information.error.ageTypeException;
 import iKeeper.medicine_Information.mapper.MedicineMapper;
@@ -23,9 +20,10 @@ public class MedicineService {
 
    private MedicineMapper medicineMapper;
    private AgeService ageService;
-    public MedicineService(MedicineMapper medicineMapper)
+    public MedicineService(MedicineMapper medicineMapper,AgeService ageService)
     {
         this.medicineMapper=medicineMapper;
+        this.ageService=ageService;
     }
     public MedicineInformation MedicineInformationLoad(String medicineCode){
         Optional<MedicineInformation> medicineInformation= medicineMapper.medicineInformationLoad(medicineCode);
@@ -48,9 +46,9 @@ public class MedicineService {
     }
     private void serviceCheck(InputRequestDTO inputRequestDTO)
     {
-        for(int i = 0; i<= inputRequestDTO.getMedicineCode().size(); i++) checkEmpty(inputRequestDTO.getMedicineCode().get(i),"medicineCode");
-        checkEmpty(String.valueOf(inputRequestDTO.getAge_a()),"age_a");
-        checkEmpty(String.valueOf(inputRequestDTO.getAge_b()),"age_b");
+        for(int i = 0; i< inputRequestDTO.getMedicineCode().size(); i++) checkEmpty(inputRequestDTO.getMedicineCode().get(i),"medicineCode");
+        checkEmpty(String.valueOf(inputRequestDTO.getAgeA()),"ageA");
+        checkEmpty(String.valueOf(inputRequestDTO.getAgeB()),"ageB");
         checkEmpty(String.valueOf(inputRequestDTO.isPregnantWomen()),"pregnantWomen");
     }
     private void checkEmpty(String value, String propertyName)
@@ -68,8 +66,12 @@ public class MedicineService {
     }
     private AnswerResponseDTO answer(InputRequestDTO inputRequestDTO)
     {
-        ageService.ageCheck(inputRequestDTO);
-        return new AnswerResponseDTO();//수정해야함
+        AnswerResponseDTO answerResponseDTO = new AnswerResponseDTO();
+        log.info(inputRequestDTO.toString());
+        List<AgeDTO> ageDTO=ageService.ageCheck(inputRequestDTO);
+        log.info("test");
+        answerResponseDTO.setAnswer(ageDTO);
+        return answerResponseDTO;//수정해야함
     }
 
 

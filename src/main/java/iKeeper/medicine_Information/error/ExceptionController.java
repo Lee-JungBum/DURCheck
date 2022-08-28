@@ -24,6 +24,7 @@ public class ExceptionController {
         Message message = new Message();
         HttpHeaders headers= new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        log.info(ex.toString());
         log.warn("CheckData");
         return new ResponseEntity(message,headers, HttpStatus.BAD_REQUEST);
     }

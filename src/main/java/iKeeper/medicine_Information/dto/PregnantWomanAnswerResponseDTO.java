@@ -1,4 +1,7 @@
 package iKeeper.medicine_Information.dto;
 
-public class PregnantWomanAnswerResponseDTO {
+public class PregnantWomanAnswerResponseDTO
+{
+    private AnswerResponseDTO answerResponseDTO;
+    
 }
