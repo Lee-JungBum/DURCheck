@@ -1,6 +1,7 @@
-package com.study.studyTwo.core;
+package iKeeper.medicine_Information.Config;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Contact;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -16,21 +17,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api() {
+    public Docket swagger() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("studyTwo")
+                .ignoredParameterTypes(java.sql.Date.class)
+                .forCodeGeneration(true)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.study.studyTwo"))
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(this.apiInfo());
+                .apiInfo(apiInfo())
+                .enable(true);
     }
 
-    private ApiInfo apiInfo() {
+    private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("studyTwo")
-                .description("REST API")
+                .title("Medicine API")
+                .description("MERT팀의 백엔드 API")
                 .version("1.0")
                 .build();
     }

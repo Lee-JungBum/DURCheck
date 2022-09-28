@@ -1,6 +1,7 @@
 package iKeeper.medicine_Information.Error;
 
 import iKeeper.medicine_Information.Status.Message;
+import io.swagger.annotations.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class ExceptionController {
     @ExceptionHandler({
         EmptyPropertyException.class,
     })
+    @ApiResponse(code=404, message="입력값에 오류가 있을때")
     public ResponseEntity BadRequestException(final RuntimeException ex)
     {
         Message message = new Message();
@@ -29,6 +31,7 @@ public class ExceptionController {
     @ExceptionHandler({
             IndexOutOfBoundsException.class,
     })
+    @ApiResponse(code=404, message="입력의 크기수가 다를때")
     public ResponseEntity indexOutOfBoundsException(final IndexOutOfBoundsException ex)
     {
         Message message = new Message();

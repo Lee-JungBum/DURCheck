@@ -38,18 +38,13 @@ public class MedicineService {
         AnswerResponseDTO answerResponseDTO = answer(inputRequestDTO);
         return answerResponseDTO;
     }
-    @Transactional
-    public PregnantWomanAnswerResponseDTO pregnantWomanAnswerService(InputRequestDTO inputRequestDTO)
+    private AnswerResponseDTO answer(InputRequestDTO inputRequestDTO)
     {
-        serviceCheck(inputRequestDTO);
-        PregnantWomanAnswerResponseDTO pregnantWomanAnswerResponseDTO = new PregnantWomanAnswerResponseDTO();
-        AnswerResponseDTO answerResponseDTO = answer(inputRequestDTO);
-        log.info("answer통과지점");
-        List<PregnantWomenDAO> pregnantWomenDAO = pregnantWomenService.pregnantWomenCheck(inputRequestDTO.getMedicineCodes(),inputRequestDTO.getMedicineNames());
-        log.info("pregnantWomenTest 통과지점");
-        pregnantWomanAnswerResponseDTO.setAnswer(answerResponseDTO);
-        pregnantWomanAnswerResponseDTO.setPregnantWomenAnswer(pregnantWomenDAO);
-        return pregnantWomanAnswerResponseDTO;
+        AnswerResponseDTO answerResponseDTO = new AnswerResponseDTO();
+        log.info(inputRequestDTO.toString());
+        List<AgeDAO> ageDAO =ageService.ageCheck(inputRequestDTO);
+        answerResponseDTO.setAnswer(ageDAO);
+        return answerResponseDTO;
     }
     private void serviceCheck(InputRequestDTO inputRequestDTO)
     {
@@ -70,14 +65,18 @@ public class MedicineService {
         return propertyName+"의 값 : "+value;
     }
 
-    private AnswerResponseDTO answer(InputRequestDTO inputRequestDTO)
+    @Transactional
+    public PregnantWomanAnswerResponseDTO pregnantWomanAnswerService(InputRequestDTO inputRequestDTO)
     {
-        AnswerResponseDTO answerResponseDTO = new AnswerResponseDTO();
-        log.info(inputRequestDTO.toString());
-        List<AgeDAO> ageDAO =ageService.ageCheck(inputRequestDTO);
-        answerResponseDTO.setAnswer(ageDAO);
-        return answerResponseDTO;
+        serviceCheck(inputRequestDTO);
+        PregnantWomanAnswerResponseDTO pregnantWomanAnswerResponseDTO = new PregnantWomanAnswerResponseDTO();
+        AnswerResponseDTO answerResponseDTO = answer(inputRequestDTO);
+        log.info("answer통과지점");
+        List<PregnantWomenDAO> pregnantWomenDAO = pregnantWomenService.pregnantWomenCheck(inputRequestDTO.getMedicineCodes(),inputRequestDTO.getMedicineNames());
+        log.info("pregnantWomenTest 통과지점");
+        pregnantWomanAnswerResponseDTO.setAnswer(answerResponseDTO);
+        pregnantWomanAnswerResponseDTO.setPregnantWomenAnswer(pregnantWomenDAO);
+        return pregnantWomanAnswerResponseDTO;
     }
-
 
 }
