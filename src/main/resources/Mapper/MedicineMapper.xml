@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "iKeeper.medicine_Information.Mapper.MedicineMapper">
+    <select id="medicineInformationLoad" resultType="iKeeper.medicine_Information.Domain.MedicineInformation">
+        SELECT *
+        FROM  medicine_information
+        WHERE medicine_code = #{medicineCode}
+    </select>
+    <select id="ageCheck" resultType="iKeeper.medicine_Information.Dao.AgeDAO">
+        SELECT medicine_code, medicine_name, ingredient_code, specific_age_a, specific_age_b, specific_age_c, detail_information
+        FROM age_taboo
+        WHERE medicine_code = #{medicineCode}
+        AND
+        (
+        ((specific_age_a > #{specificAgeA})AND (specific_age_c = '미만 (1)'))
+        OR
+        ((specific_age_a >= #{specificAgeA})AND (specific_age_c = '이하 (2)'))
+        OR
+        ((<![CDATA[specific_age_a <= #{specificAgeA}]]>)AND (specific_age_c = '이상 (4)'))
+        )
+        AND specific_age_b = #{specificAgeB}
+    </select>
+    <select id="pregnantWomenCheck" resultType="iKeeper.medicine_Information.Dao.PregnantWomenDAO">
+        SELECT ingredient_code, medicine_code, medicine_name,taboo_grade,detail_information
+        FROM  pregnant_women_taboo
+        WHERE medicine_code = #{medicineCode}
+    </select>
+</mapper>
